@@ -71,7 +71,7 @@ module Searchkick
         # https://github.com/karmi/tire/blob/master/lib/tire/model/import.rb
         # use cursor for Mongoid
         items = []
-        scope.all.each do |item|
+        scope.all.no_timeout.each do |item|
           items << item if item.should_index?
           if items.length % batch_size == 0
             index.import items
